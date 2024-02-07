@@ -24,6 +24,9 @@ const BarCodeInfo = () => {
       setError(null); // Clear any previous errors
     } catch (error) {
       setError("Error getting data. Please try another barcode.");
+      setTimeout(() => {
+          setError(null)
+      }, 3000);
       console.log("Error getting data: ", error);
     }
   };
