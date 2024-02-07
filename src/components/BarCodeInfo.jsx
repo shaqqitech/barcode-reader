@@ -23,7 +23,7 @@ const BarCodeInfo = () => {
       setProduct(res.data.product);
       setError(null); // Clear any previous errors
     } catch (error) {
-      setError("Error getting data. Please try again.");
+      setError("Error getting data. Please try another barcode.");
       console.log("Error getting data: ", error);
     }
   };
@@ -42,7 +42,7 @@ const BarCodeInfo = () => {
           </label>
           <div className="flex items-center space-x-2">
             <input
-              type="number"
+              type="text"
               id="text"
               value={barcode}
               onChange={handleChange}
@@ -96,7 +96,7 @@ const BarCodeInfo = () => {
                 Product Information
               </h2>
               <motion.div
-                className="w-full grid grid-cols-2 gap-4"
+                className="w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.7, duration: 0.5 }}
@@ -122,6 +122,7 @@ const BarCodeInfo = () => {
                   value={product.nutrition_grade_fr}
                 />
                 <InfoItem label="Quantity" value={product.quantity} />
+                {/* Add more InfoItem components here */}
               </motion.div>
             </motion.div>
           </motion.div>
@@ -132,10 +133,15 @@ const BarCodeInfo = () => {
 };
 
 const InfoItem = ({ label, value }) => (
-  <div className="bg-gray-800 rounded-xl p-4">
+  <motion.div
+    className="bg-gray-800 rounded-xl p-4"
+    initial={{ opacity: 0, scale: 0.5 }}
+    animate={{ opacity: 1, scale: 1 }}
+    transition={{ duration: 0.5 }}
+  >
     <p className="text-gray-400">{label}</p>
     <p className="text-white mt-1">{value}</p>
-  </div>
+  </motion.div>
 );
 
 export default BarCodeInfo;
